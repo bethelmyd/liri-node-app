@@ -68,7 +68,10 @@ function getSongInfo(song){
         {
             var songData = data.tracks.items[i];
             result += "Result [" + (i+1) + "]\n";
-            result += "Artist: " + songData.artists[0].name + "\n";
+            result += "Artist(s): \n";
+            for(var j = 0; j < songData.artists.length; j++){
+                result += "\t(" + (j+1) + ") " + songData.artists[j].name + "\n";
+            }
             result += "Song: " + songData.name + "\n";
             result += "Album: " + songData.album.name + "\n";
             result += "Preview URL: " + songData.preview_url + "\n";
