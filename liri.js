@@ -10,12 +10,12 @@ function getTweets(){
     var t = new Twit(twitKeys.twitterKeys);
 
     var params = {
-        q: 'from%3Abethelmyd', //'from%3Alonesomewonder1',
+        screen_name: '@lonesomewonder1', // '@bethelmyd', //
         count: 20,
         result_type: 'recent'
     };
 
-    t.get('search/tweets', params, displayTweets);
+    t.get('statuses/user_timeline', params, displayTweets);
 
     function displayTweets(err, data, response)
     {
@@ -24,19 +24,19 @@ function getTweets(){
             console.log("Error getting tweets: " + err);
             return;
         }
-        console.log(data.statuses);
+        console.log(data);
         var output = "";
-        if (data.statuses.length == 0)
+        if (data.length == 0)
         {
-            var screen_name = params.q.replace("from%3A", "");
+            var screen_name = params.screen_name;
             output = "No tweets from " + screen_name + "\n";
         }
         else{
 
-            output = "Tweets from " +  data.statuses[0].user.name + " - " + data.statuses[0].user.screen_name + ":\n";
-            for(var i = 0; i < data.statuses.length; i++)
+            output = "Tweets from " +  data[0].user.name + " - " + data[0].user.screen_name + ":\n";
+            for(var i = 0; i < data.length; i++)
             {
-                output += data.statuses[i].text + "\n";
+                output += "[" + (i+1) + "] " + data[i].text + "\n";
             }
         }
 
