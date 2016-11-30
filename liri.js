@@ -6,12 +6,18 @@ var twitKeys = require ('./keys.js');
 var fs = require("fs");
 var path = "./log.txt";
 
-function getTweets(){
+function getTweets(args){
     var t = new Twit(twitKeys.twitterKeys);
 
+    var myCount = 20;
+    if(args.length > 1)
+    {
+        myCount = parseInt(args[1]);
+    }
+
     var params = {
-        screen_name: '@lonesomewonder1', // '@bethelmyd', //
-        count: 20,
+        screen_name: '@TheEllenShow', // '@bethelmyd', //
+        count: myCount,
         result_type: 'recent'
     };
 
@@ -24,7 +30,7 @@ function getTweets(){
             console.log("Error getting tweets: " + err);
             return;
         }
-        console.log(data);
+        //console.log(data);
         var output = "";
         if (data.length == 0)
         {
@@ -150,7 +156,7 @@ function processCommands(args)
 {
     switch(args[0])
     {
-        case 'my-tweets': getTweets(); break;
+        case 'my-tweets': getTweets(args); break;
         case 'spotify-this-song': handleSongs(args); break;
         case 'movie-this': handleMovies(args); break;
         case 'do-what-it-says': handleFileRead(); break;
