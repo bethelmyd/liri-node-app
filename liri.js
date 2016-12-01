@@ -1,3 +1,6 @@
+//npm init  (creates a package.json file)
+//npm install whatever-module -save   (this adds module dependencies to the package.json file)
+
 "use strict";
 var request = require("request");
 var spotify = require('spotify');
