@@ -65,7 +65,7 @@ function getTweets(args){
 function getSongInfo(song){
 
     
-    spotify.search({ type: 'track', query: "track:"+song, limit: 10 }, function(err, data) {
+    spotify.search({ type: 'track', query: "track:"+song+"&limit=10" }, function(err, data) {
         if ( err ) {
             console.log('Error occurred: ' + err);
             return;
@@ -152,6 +152,15 @@ function processInput(){
     }
 
     args = args.slice(2);  //get rid of "node liri.js"
+    console.log(args[0]+"\n");
+    fs.appendFile(path, args[0]+"\n", function(error) {
+        if (error) {
+            console.error("Write error:  " + error.message);
+        } else {
+            console.log("Successful Write to " + path);
+        }
+    });
+    
     processCommands(args);
 }
 
